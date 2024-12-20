@@ -28,7 +28,7 @@ AddEventHandler("OnClientConnect", function (event, playerid)
 
         local responseData = json.decode(body)
         if not responseData then
-            print("Failed to decode json")
+            player:SetVar("level", 1)
             return
         end
 
@@ -49,7 +49,7 @@ AddEventHandler("OnPlayerSpawn", function (event)
     local player = GetPlayer(playerid)
     if not player or player:IsFakeClient() or not player:IsValid() then return end
 
-    local faceitLevel = iLevels[player:GetVar("level")] or 1088
+    local faceitLevel = iLevels[player:GetVar("level") or 1] or 1088
     local ranks = player:CCSPlayerController().InventoryServices.Rank
     ranks[6] = faceitLevel
     player:CCSPlayerController().InventoryServices.Rank = ranks
